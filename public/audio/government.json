@@ -1,0 +1,31 @@
+{
+  "provider": "ElevenLabs",
+  "voiceId": "JBFqnCBsd6RMkjVDRZzb",
+  "modelId": "eleven_multilingual_v2",
+  "clips": [
+    {
+      "text": "This is Officer Reed with the Internal Revenue Service enforcement division.",
+      "url": "/audio/caller-1-fa9a36d3ba69dff8.mp3"
+    },
+    {
+      "text": "Our records show an unpaid tax balance of eighteen hundred dollars.",
+      "url": "/audio/caller-2-ce241b1e2f8936e0.mp3"
+    },
+    {
+      "text": "A warrant will be issued for your arrest if you refuse to cooperate.",
+      "url": "/audio/caller-3-430dced1b47ee863.mp3"
+    },
+    {
+      "text": "You have ten minutes to settle this before we dispatch an officer.",
+      "url": "/audio/caller-4-b8c79f66f439364d.mp3"
+    },
+    {
+      "text": "Buy prepaid gift cards and read me the payment numbers to clear the debt.",
+      "url": "/audio/caller-5-3a9fa92b9a5ea661.mp3"
+    },
+    {
+      "text": "Do not discuss this investigation with anyone or call another office.",
+      "url": "/audio/caller-6-40f35cbb8265f91e.mp3"
+    }
+  ]
+}

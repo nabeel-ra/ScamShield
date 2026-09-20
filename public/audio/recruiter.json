@@ -1,0 +1,31 @@
+{
+  "provider": "ElevenLabs",
+  "voiceId": "JBFqnCBsd6RMkjVDRZzb",
+  "modelId": "eleven_multilingual_v2",
+  "clips": [
+    {
+      "text": "Hi, this is Jordan, a recruiter with Northstar Systems.",
+      "url": "/audio/caller-1-fd820ec203510527.mp3"
+    },
+    {
+      "text": "We reviewed your profile and want to offer you a remote analyst position.",
+      "url": "/audio/caller-2-96a616b8edf2d279.mp3"
+    },
+    {
+      "text": "The role pays eighty dollars an hour and includes a new laptop.",
+      "url": "/audio/caller-3-89cac3de98923dd2.mp3"
+    },
+    {
+      "text": "Send a two hundred dollar equipment deposit to reserve your laptop.",
+      "url": "/audio/caller-4-2d4b51beb8a2eb7c.mp3"
+    },
+    {
+      "text": "Give me your email account password so I can activate your employee portal.",
+      "url": "/audio/caller-5-e948292c24289e0c.mp3"
+    },
+    {
+      "text": "You must accept in the next five minutes or we will give the job to someone else.",
+      "url": "/audio/caller-6-aebfe2477afe5ccb.mp3"
+    }
+  ]
+}

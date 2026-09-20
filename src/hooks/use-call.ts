@@ -1,9 +1,11 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
-import { CALL_DURATION, scenario } from '@/lib/scenario';
+import type { Scenario } from '@/lib/scenarios';
 import { AudioManifest, validAudioManifest } from '@/lib/audio';
 
-export function useCall() {
+export function useCall(selected: Scenario) {
+  const scenario = selected.lines;
+  const CALL_DURATION = selected.duration;
   const [status, setStatus] = useState<'idle' | 'active' | 'ended'>('idle');
   const [elapsed, setElapsed] = useState(0);
   const [lineCount, setLineCount] = useState(0);
@@ -23,7 +25,7 @@ export function useCall() {
   async function refreshAudio(signal?: AbortSignal) {
     setChecking(true);
     try {
-      const response = await fetch('/audio/manifest.json', { cache: 'no-store', signal });
+      const response = await fetch(selected.manifest, { cache: 'no-store', signal });
       const value: unknown = response.ok ? await response.json() : null;
       if (!signal?.aborted) setManifest(validAudioManifest(value, scenario.map(line => line.text)) ? value : null);
     } catch { if (!signal?.aborted) setManifest(null); }

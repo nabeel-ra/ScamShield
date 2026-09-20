@@ -7,7 +7,7 @@ export type DetectionEvent = AnalyzedDetection & { detectedAt: number };
 
 // One request at a time. If speech moves ahead, analyze the newest available prefix next.
 // An epoch and AbortController prevent replay/mode changes from accepting stale results.
-export function useNemotron(lineCount: number, elapsed: number, mode: AnalysisMode, session: number) {
+export function useNemotron(lineCount: number, elapsed: number, mode: AnalysisMode, session: number, scenarioId: string) {
   const [detections, setDetections] = useState<DetectionEvent[]>([]);
   const [analyzedCount, setAnalyzedCount] = useState(0);
   const [busy, setBusy] = useState(false);
@@ -27,7 +27,7 @@ export function useNemotron(lineCount: number, elapsed: number, mode: AnalysisMo
     state.processed = 0;
     setDetections([]); setAnalyzedCount(0); setBusy(false); setError(null); setModel(''); setLatencyMs(0); setAttempts(0);
     return () => { state.epoch += 1; state.controller?.abort(); };
-  }, [mode, session]);
+  }, [mode, session, scenarioId]);
 
   useEffect(() => {
     const state = control.current;
@@ -38,7 +38,7 @@ export function useNemotron(lineCount: number, elapsed: number, mode: AnalysisMo
     state.busy = true; setBusy(true);
     async function analyze() {
       try {
-        const response = await fetch('/api/analyze', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ lineCount }), signal: controller.signal });
+        const response = await fetch('/api/analyze', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ lineCount, scenarioId }), signal: controller.signal });
         const result = await response.json();
         if (epoch !== state.epoch) return;
         if (!response.ok) throw new Error(result.error || 'Analysis failed. Retry or select Mock mode.');
@@ -56,6 +56,6 @@ export function useNemotron(lineCount: number, elapsed: number, mode: AnalysisMo
       }
     }
     void analyze();
-  }, [lineCount, mode, session, busy, error, retry]);
+  }, [lineCount, mode, session, scenarioId, busy, error, retry]);
   return { detections, analyzedCount, busy, error, model, latencyMs, attempts, retry: () => { setError(null); setRetry(value => value + 1); } };
 }

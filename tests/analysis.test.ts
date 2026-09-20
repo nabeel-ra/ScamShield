@@ -1,7 +1,8 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { parseDetections } from '../src/lib/analysis';
-import { scenario, scoreRisk } from '../src/lib/scenario';
+import { scoreRisk } from '../src/lib/scenario';
+import { bankFraudLines as scenario, scenarios } from '../src/lib/scenarios';
 import { POST } from '../src/app/api/analyze/route';
 
 const lines = scenario.map(line => line.text);
@@ -33,7 +34,7 @@ test('route validates input and fails safely without exposing keys or provider e
   try {
     delete process.env.NVIDIA_API_KEY;
     assert.equal((await POST(request({ lineCount: 1 }))).status, 503);
-    for (const input of [{ lineCount: 0 }, { lineCount: 7 }, { lineCount: 1.5 }, { lineCount: 1, transcript: 'custom data' }, null]) assert.equal((await POST(request(input))).status, 400);
+    for (const input of [{ lineCount: 1, scenarioId: 'unknown' }, { lineCount: 1, scenarioId: {} }, { lineCount: 0 }, { lineCount: 7 }, { lineCount: 1.5 }, { lineCount: 1, transcript: 'custom data' }, null]) assert.equal((await POST(request(input))).status, 400);
     process.env.NVIDIA_API_KEY = 'test-key-not-real';
     globalThis.fetch = async (_url, options) => {
       const sent = JSON.parse(String(options?.body));
@@ -44,6 +45,15 @@ test('route validates input and fails safely without exposing keys or provider e
     const success = await POST(request({ lineCount: 5 }));
     assert.equal(success.status, 200);
     assert.equal((await success.json()).techniques[0].lineIndex, 4);
+    for (const selected of scenarios) {
+      globalThis.fetch = async (_url, options) => {
+        const sent = JSON.parse(String(options?.body));
+        assert.deepEqual(JSON.parse(sent.messages[1].content).transcript, selected.lines.slice(0, 3).map(line => line.text));
+        assert.equal(JSON.stringify(sent).includes('detections'), false);
+        return Response.json({ choices: [{ finish_reason: 'stop', message: { content: json([]) } }] });
+      };
+      assert.equal((await POST(request({ lineCount: 3, scenarioId: selected.id }))).status, 200);
+    }
     globalThis.fetch = async () => Response.json({ choices: [{ finish_reason: 'stop', message: { content: json([{ ...valid, evidence: 'invented' }]) } }] });
     assert.equal((await POST(request({ lineCount: 5 }))).status, 502);
     globalThis.fetch = async () => new Response('secret provider debug detail', { status: 401 });

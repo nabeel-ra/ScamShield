@@ -1,0 +1,31 @@
+{
+  "provider": "ElevenLabs",
+  "voiceId": "JBFqnCBsd6RMkjVDRZzb",
+  "modelId": "eleven_multilingual_v2",
+  "clips": [
+    {
+      "text": "Hello, I am Alex from Microsoft security support.",
+      "url": "/audio/caller-1-44fae9ad842a469c.mp3"
+    },
+    {
+      "text": "Your computer has reported a serious virus infection to our monitoring system.",
+      "url": "/audio/caller-2-70021a15954a3840.mp3"
+    },
+    {
+      "text": "You must act right now before the infection spreads.",
+      "url": "/audio/caller-3-afca8d8262ec29d6.mp3"
+    },
+    {
+      "text": "Tell me your computer login password so I can run the repair.",
+      "url": "/audio/caller-4-ef4bc5961a916667.mp3"
+    },
+    {
+      "text": "If you refuse the repair, you will permanently lose all your files.",
+      "url": "/audio/caller-5-9a6e18e9252f7c58.mp3"
+    },
+    {
+      "text": "Pay the ninety-nine dollar security fee using the payment link I sent.",
+      "url": "/audio/caller-6-b444759387d126be.mp3"
+    }
+  ]
+}

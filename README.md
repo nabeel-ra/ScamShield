@@ -2,18 +2,19 @@
 
 [Live demo](https://scamshield-flax-two.vercel.app) · [GitHub](https://github.com/nabeel-ra/ScamShield) · [Evaluation](https://scamshield-flax-two.vercel.app/evaluation)
 
-ScamShield makes social-engineering tactics visible during a synthetic phone call. A voiced bank-fraud scenario plays while the transcript, scam tactics, quoted evidence, deterministic risk score, and safety recommendation update. A post-call timeline explains the warnings.
+ScamShield makes social-engineering tactics visible during a synthetic phone call. One of five selectable voiced scenarios plays while the transcript, scam tactics, quoted evidence, deterministic risk score, and safety recommendation update. A post-call timeline explains the warnings.
 
 Built for a hackathon with **Next.js App Router, React, TypeScript, Tailwind CSS, NVIDIA Nemotron, and ElevenLabs**. No database, authentication, microphone, or real phone calls are required. All call and evaluation data is synthetic.
 
 ## Try the demo
 
-1. Select **NVIDIA Nemotron** for real model classification, or **Mock** for scripted offline detections.
-2. Select **ElevenLabs voice**, then **Start call**.
-3. Follow the transcript and risk panel; inspect the evidence, recommendation, and timeline.
-4. Use **Replay call**, **End call**, or **Mute** as needed.
+1. Choose Bank Fraud, IRS / Government Impersonation, Tech Support Scam, Fake Recruiter Scam, or Family Emergency Scam, then continue.
+2. Select **NVIDIA Nemotron** for real model classification, or **Mock** for scripted offline detections.
+3. Select **ElevenLabs voice**, then **Start call**.
+4. Follow the transcript and risk panel; inspect the evidence, recommendation, and timeline.
+5. Use **Replay call**, **End call**, or **Mute** as needed. **Try Another Scenario** returns to the picker with a fresh call and analysis.
 
-Voice clips are included, so playback needs no ElevenLabs API request. Silent mode provides the original 35-second simulation. Nemotron can take longer than the spoken dialogue; coverage and pending/error states are visible. Mock mode is explicitly labeled and never silently substituted for AI output.
+Voice clips are included, so playback needs no ElevenLabs API request. Silent simulations run for 35–39 seconds; voice timing follows each saved clip. Nemotron can take longer than the spoken dialogue; coverage and pending/error states are visible. Mock mode is explicitly labeled and never silently substituted for AI output.
 
 ## Run locally
 
@@ -50,10 +51,12 @@ Synthetic scenario → saved ElevenLabs speech + synchronized transcript
 - `src/components/dashboard.tsx`: main demo interface.
 - `src/hooks/use-call.ts`: audio sequencing, call timer, replay, and cancellation.
 - `src/hooks/use-nemotron.ts`: sequential analysis and protection against stale responses.
-- `src/app/api/analyze/route.ts`: server-only endpoint, accepting only a synthetic transcript prefix length.
+- `src/app/api/analyze/route.ts`: server-only endpoint, accepting only an allowlisted scenario ID and synthetic transcript prefix length.
 - `src/lib/nemotron.ts` / `nvidia-transport.ts`: model calls and bounded transient retries.
 - `src/lib/analysis.ts`: structured-output prompt and validation.
-- `src/lib/scenario.ts`: synthetic dialogue, tactic weights, and safety guidance.
+- `src/lib/scenarios.ts`: reusable scenario metadata, scripts, timings, mock labels, audio manifests, and verification guidance.
+- `src/lib/scenario.ts`: shared tactic types, weights, risk scoring, and safety guidance.
+- `src/components/scenario-picker.tsx`: accessible scenario selection.
 - `/evaluation`: saved measured results and individual predictions.
 
 ## NVIDIA Nemotron: beyond a chatbot
@@ -68,7 +71,7 @@ Temporary NVIDIA 429/500/502/503/504 responses and network failures receive up t
 
 ## ElevenLabs: meaningful voice
 
-Six speech clips were generated from the synthetic caller dialogue using ElevenLabs Multilingual v2 and the stock George voice. Each transcript line appears when its clip starts; the next clip starts when the previous clip ends. These are synchronized scripted transcripts, not speech-to-text.
+Thirty speech clips across five scenarios were generated from the synthetic caller dialogue using ElevenLabs Multilingual v2 and the stock George voice. Each transcript line appears when its clip starts; the next clip starts when the previous clip ends. These are synchronized scripted transcripts, not speech-to-text.
 
 To regenerate clips, set `ELEVENLABS_API_KEY` (the secret beginning `sk_`) and optionally `ELEVENLABS_VOICE_ID` in `.env.local`, then run:
 
@@ -76,7 +79,7 @@ To regenerate clips, set `ELEVENLABS_API_KEY` (the secret beginning `sk_`) and o
 npm run audio:generate
 ```
 
-This uses ElevenLabs credits. Unchanged clips are reused by content hash. The generated manifest contains no credentials. Review attribution/license requirements of your ElevenLabs plan before distributing the generated audio.
+This uses ElevenLabs credits. Unchanged clips are reused by content hash. Each scenario’s generated manifest contains no credentials. All clips must exist before its manifest is published. Review attribution/license requirements of your ElevenLabs plan before distributing the generated audio.
 
 ## Evaluation
 

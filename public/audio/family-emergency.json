@@ -1,0 +1,31 @@
+{
+  "provider": "ElevenLabs",
+  "voiceId": "JBFqnCBsd6RMkjVDRZzb",
+  "modelId": "eleven_multilingual_v2",
+  "clips": [
+    {
+      "text": "It is me, Sam. I sound different because I hurt my nose in an accident.",
+      "url": "/audio/caller-1-d664998075d981af.mp3"
+    },
+    {
+      "text": "I am at the police station and I am scared.",
+      "url": "/audio/caller-2-406f3846ce2deb06.mp3"
+    },
+    {
+      "text": "Please do not tell anyone in the family or call my usual number.",
+      "url": "/audio/caller-3-4452edd6d97b7746.mp3"
+    },
+    {
+      "text": "I need you to send nine hundred dollars by wire transfer for my release.",
+      "url": "/audio/caller-4-c039a8383f33dcdb.mp3"
+    },
+    {
+      "text": "Please send it immediately, there are only five minutes left.",
+      "url": "/audio/caller-5-29cc937c57861c8d.mp3"
+    },
+    {
+      "text": "If you do not pay, they will keep me locked up all weekend.",
+      "url": "/audio/caller-6-a6a0df135c0551b1.mp3"
+    }
+  ]
+}
