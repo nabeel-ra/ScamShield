@@ -1,5 +1,7 @@
 # ScamShield
 
+[Live demo](https://scamshield-flax-two.vercel.app) · [GitHub](https://github.com/nabeel-ra/ScamShield) · [Evaluation](https://scamshield-flax-two.vercel.app/evaluation)
+
 ScamShield makes social-engineering tactics visible during a synthetic phone call. A voiced bank-fraud scenario plays while the transcript, scam tactics, quoted evidence, deterministic risk score, and safety recommendation update. A post-call timeline explains the warnings.
 
 Built for a hackathon with **Next.js App Router, React, TypeScript, Tailwind CSS, NVIDIA Nemotron, and ElevenLabs**. No database, authentication, microphone, or real phone calls are required. All call and evaluation data is synthetic.
@@ -96,6 +98,8 @@ npm run evaluate
 This makes real NVIDIA requests and creates a new saved run. Classifications are not retried to obtain better labels. The results page includes downloadable JSON, prediction filters, evidence, formulas, and limitations.
 
 ## Deployment on Vercel
+
+Production is deployed at https://scamshield-flax-two.vercel.app using the Vercel CLI. Automatic deployments on Git pushes are not connected yet; the Vercel account needs its GitHub login connection enabled. The current deployment does not depend on that connection.
 
 Import the GitHub repository using Vercel's **Next.js** preset. Install with `npm ci` and build with `npm run build`.
 
