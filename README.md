@@ -1,7 +1,5 @@
 # ScamShield
 
-(Nabeel Raza, nar179@pitt.edu)
-
 [Live demo](https://scamshield-flax-two.vercel.app) · [GitHub](https://github.com/nabeel-ra/ScamShield) · [Evaluation](https://scamshield-flax-two.vercel.app/evaluation)
 
 ScamShield makes social-engineering tactics visible during a synthetic phone call. One of five selectable voiced scenarios plays while the transcript, scam tactics, quoted evidence, deterministic risk score, and safety recommendation update. A post-call timeline explains the warnings.
