@@ -1,0 +1,31 @@
+{
+  "provider": "ElevenLabs",
+  "voiceId": "JBFqnCBsd6RMkjVDRZzb",
+  "modelId": "eleven_multilingual_v2",
+  "clips": [
+    {
+      "text": "Hi, this is David from First National Bank’s fraud department.",
+      "url": "/audio/caller-1-12d4939897878973.mp3"
+    },
+    {
+      "text": "We detected a suspicious $1,200 purchase on your account.",
+      "url": "/audio/caller-2-aea99f732c9e36a2.mp3"
+    },
+    {
+      "text": "We need to resolve this immediately before the charge becomes permanent.",
+      "url": "/audio/caller-3-456253349a1dd6cc.mp3"
+    },
+    {
+      "text": "I just sent you a six-digit verification code.",
+      "url": "/audio/caller-4-c6b01832b9c2b174.mp3"
+    },
+    {
+      "text": "Please read that code back to me.",
+      "url": "/audio/caller-5-b71bf85db94cf85a.mp3"
+    },
+    {
+      "text": "Do not hang up or your account may be locked.",
+      "url": "/audio/caller-6-a305df001a56c771.mp3"
+    }
+  ]
+}
